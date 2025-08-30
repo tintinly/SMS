@@ -1,6 +1,13 @@
 import socket
 import json
 import os
+import win32api, win32gui
+
+# 后台运行关键代码
+# start main.py
+ct = win32api.GetConsoleTitle()
+hd = win32gui.FindWindow(0,ct)
+win32gui.ShowWindow(hd,0)
 
 def receive_message(port):
     # 创建socket对象

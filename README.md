@@ -64,5 +64,12 @@ python main.py
 
 <img src="README.assets/image-20240812230315063.png" alt="image-20240812230315063" style="zoom: 33%;" />
 
+### 4.设置开机项
 
+讲main.py创建快捷方式拖入系统启动文件夹中C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup
 
+![image-20250830130441533](README.assets/image-20250830130441533-17565304277713.png)
+
+或win+r 输入`shell:startup`打开用户的启动文件夹并拖入
+
+![image-20250830130420237](README.assets/image-20250830130420237.png)
