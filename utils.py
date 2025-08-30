@@ -12,10 +12,10 @@ def extract_first_long_number(text):
 
 def match_Captcha_number(text):
     # 匹配app和验证码
-    pattern = r'(【\S*】).*(\d{4,})'
+    pattern = r'(【\S*】)\D*(\d{4,})'
     match = re.search(pattern, text)
     if match:
-        return match
+        return match.group(2)
     return None
 
 
@@ -27,9 +27,7 @@ def show_toast_notification(title, message, duration=3):
 
 
 def copy_verification_code(text):
-    match = match_Captcha_number(text)
-    app = match.group(1)
-    number = match.group(2)
+    number = match_Captcha_number(text)
     if number:
         # 复制到剪贴板
         pyperclip.copy(number)
@@ -46,5 +44,5 @@ def copy_verification_code(text):
 
 
 if __name__ == "__main__":
-    text = "这是一段包含数字1234、56789和100的文本。"
+    text = "【app】这是一段包含数字1234、56789和100的文本。"
     copy_verification_code(text)
