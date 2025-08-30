@@ -2,9 +2,9 @@ import socket
 import json
 import os
 import win32api, win32gui
+from urllib.parse import unquote
 
 # 后台运行关键代码
-# start main.py
 ct = win32api.GetConsoleTitle()
 hd = win32gui.FindWindow(0,ct)
 win32gui.ShowWindow(hd,0)
@@ -31,8 +31,8 @@ def receive_message(port):
 
         # 接收数据
         data = client_socket.recv(1024)
-        text = data.decode('utf-8')
-        print(f"Received data: {text}")
+        text = unquote(data)
+        print(f"Received data:\n {text}")
 
         utils.copy_verification_code(text)
 

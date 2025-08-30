@@ -10,6 +10,14 @@ def extract_first_long_number(text):
         return match.group(0)
     return None
 
+def match_Captcha_number(text):
+    # 匹配app和验证码
+    pattern = r'(【\S*】).*(\d{4,})'
+    match = re.search(pattern, text)
+    if match:
+        return match
+    return None
+
 
 def show_toast_notification(title, message, duration=3):
     # 创建通知对象
@@ -19,13 +27,15 @@ def show_toast_notification(title, message, duration=3):
 
 
 def copy_verification_code(text):
-    number = extract_first_long_number(text)
+    match = match_Captcha_number(text)
+    app = match.group(1)
+    number = match.group(2)
     if number:
         # 复制到剪贴板
         pyperclip.copy(number)
         print(f"已复制到剪贴板: {number}")
-        # 显示通知，收到的文本左右有{}，text[1: -2]可以取到{}中的文本
-        show_toast_notification("复制成功", text[1: -2])
+        # 显示通知
+        show_toast_notification("复制成功", text)
         return number
     else:
         print("未找到符合条件的数字字符串")
